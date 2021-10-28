@@ -7,7 +7,7 @@ import Formsignup from './Formsignup'
 const Signupform = () => {
     return <Formcontainer>
     <Forminput title='Full Name' placeholder='Manasseh Ameyow'/>
-    <Forminput title='Email' placeholder='example@gmail.com'/>
+    <Forminput autoCapitalize='none' title='Email' placeholder='example@gmail.com'/>
     <Forminput title='Password' placeholder='************'/>
     <Forminput title='Confirm Password' placeholder='************'/>
         <Formsignup title='Sign Up'/>
