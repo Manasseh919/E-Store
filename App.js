@@ -1,13 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 
-import React from 'react';
-import { StyleSheet, Text, View ,Dimensions,Button, TextInput,Alert,Linking, TouchableOpacity,Image, TouchableWithoutFeedback, ScrollView} from 'react-native';
+import React, {useRef}from 'react';
+import { StyleSheet, Text, View ,Dimensions,Animated,Button, TextInput,Alert,Linking, TouchableOpacity,Image, TouchableWithoutFeedback, ScrollView} from 'react-native';
 import Formloader from './components/formloader';
 import FormSelectionBtn from './components/formSelection';
 import Loginform from './components/Loginform';
 import Signupform from './components/Signupform';
 
+const {width} = Dimensions.get('window')
+
+
 export default function App() {
+  const animation = useRef(new Animated.Value(0)).current;
+  const scrollView = useRef()
+
+  const rightHeaderOpacity = animation.interpolate({
+    inputRange:[0,width],
+    outputRange:[1,0],
+  });
+  const leftHeaderTranslateX = animation.interpolate({
+    inputRange:[0,width],
+    outputRange:[0,40],
+  });
+  const rightHeaderTranslateY = animation.interpolate({
+    inputRange:[0,width],
+    outputRange:[0,-20],
+  });
+  const loginColorInterpolate = animation.interpolate({
+    inputRange:[0,width],
+    outputRange:['rgba(27,27,51,1)','rgba(27,27,51,0.4)'],
+  });
+  const signupColorInterpolate = animation.interpolate({
+    inputRange:[0,width],
+    outputRange:['rgba(27,27,51,0.4)','rgba(27,27,51,1)'],
+  });
+  
+
+
   return (
 
     
@@ -17,6 +46,9 @@ export default function App() {
         leftHeading='Welcome ' 
         rightHeading='Back'
         subHeading='Manasseh Is Awesome'
+        rightHeaderOpacity={rightHeaderOpacity}
+        leftHeaderTranslateX={leftHeaderTranslateX}
+        rightHeaderTranslateY={rightHeaderTranslateY}
          />
       </View>  
       <View style={{
@@ -24,13 +56,29 @@ export default function App() {
         padding:20,
         marginBottom:20
       }}>
-        <FormSelectionBtn style={styles.borderLeft} backgroundColor='rgba(27,27,51,1)'  title='Login'/>
-        <FormSelectionBtn  style={styles.borderRight} style={styles.borderRight} backgroundColor='rgba(27,27,51,0.4)' title='Sign Up'/>
+        <FormSelectionBtn 
+        style={styles.borderLeft} 
+        backgroundColor={loginColorInterpolate}
+          title='Login'
+          onPress={()=> scrollView.current.scrollTo({x:0})}
+          />
+        <FormSelectionBtn  
+        style={styles.borderRight}
+         backgroundColor={signupColorInterpolate} 
+          title='Sign Up'
+          onPress={()=> scrollView.current.scrollTo({x:width})}
+          />
         
       </View>
-      <ScrollView horizontal
+      <ScrollView 
+      ref = {scrollView}
+      horizontal
        pagingEnabled
         showsHorizontalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll ={Animated.event([{nativeEvent:{contentOffset:{x:animation}}}],
+          {useNativeDriver:false}
+          )}
       >
         <Loginform/>
         <Signupform/>
