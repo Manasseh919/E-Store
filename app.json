@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "amtired",
-    "slug": "amtired",
+    "name": "eStore",
+    "slug": "eStore",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
