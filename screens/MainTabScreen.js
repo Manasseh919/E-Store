@@ -38,7 +38,7 @@ const MainTabScreen = () => (
         component={DetailStackScreen}
         options={{
           tabBarLabel: 'Updates',
-          tabBarColor:'blue',
+          tabBarColor:'green',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-notifications" color={color} size={26} />
           ),

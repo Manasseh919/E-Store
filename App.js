@@ -11,6 +11,8 @@ import BookmarkScreen from './screens/BookmarkScreen';
 import RootStackScreen from './screens/RootStackScreen';
 import { View, ActivityIndicator } from 'react-native';
 import { AuthContext } from './components/context';
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,13 +23,13 @@ const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
 
- const initialLoginState = {
+  const initialLoginState = {
     isLoading: true,
     userName: null,
     userToken: null,
   };
 
- const loginReducer = (prevState, action) => {
+  const loginReducer = (prevState, action) => {
     switch (action.type) {
       case 'RETRIEVE_TOKEN':
         return {
@@ -38,7 +40,7 @@ const App = () => {
       case 'Login':
         return {
           ...prevState,
-          username: action.id,
+          userName: action.id,
           userToken: action.token,
           isLoading: false,
         };
@@ -52,7 +54,7 @@ const App = () => {
       case 'REGISTER':
         return {
           ...prevState,
-          username: action.id,
+          userName: action.id,
           userToken: action.token,
           isLoading: false,
         };
@@ -66,16 +68,16 @@ const App = () => {
       setUserToken('jakd');
       setIsLoading(false);
       let userToken;
-      userName=null;
-if(userName=='user' && password =='pass'){
-  userToken='askjdnklf'
-}
-// dispatch({type:'LOGIN',id:userName,token:userToken});
+      userName = null;
+      if (userName == 'user' && password == 'pass') {
+        userToken = 'askjdnklf'
+      }
+      // dispatch({ type: 'LOGIN', id: userName, token: userToken });
     },
     signOut: () => {
       setUserToken(null);
       setIsLoading(false);
-      // dispatch({type:'LOGOUT'});
+      // dispatch({ type: 'LOGOUT' });
     },
     signUp: () => {
       setUserToken('jakd');
@@ -86,7 +88,7 @@ if(userName=='user' && password =='pass'){
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-      // dispatch({type:'REGISTER',token:'DHGGDK'});
+      // dispatch({ type: 'REGISTER', token: 'DHGGDK' });
     }, 1000);
   }, []);
 
@@ -99,6 +101,9 @@ if(userName=='user' && password =='pass'){
   }
 
   return (
+    // <DetailScreen/>
+
+    // // <HomeScreen/>
     <AuthContext.Provider value={authContext}>
       <NavigationContainer >
         {userToken !== null ? (

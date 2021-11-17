@@ -48,7 +48,7 @@ const SignInScreen = ({ navigation }) => {
     }
     const loginHandle = (username,password) =>{
      
-        signIn(username,password)
+        signIn(username,password);
     }
 
     return (

@@ -2,18 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Button, StyleSheet, Text, View,navigation } from 'react-native';
 import 'react-native-gesture-handler';
+import Products from '../components/products';
+import SeparateDetails from '../components/SeparateDetails';
 
 
 
 const HomeScreen = ({navigation}) => {
     return (
-      <View style={styles.container}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to details screen"
-          onPress={()=>navigation.navigate("Details")}
-        />
-      </View>
+     <Products/>
+   
     );
   };
 
